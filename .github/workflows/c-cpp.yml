@@ -2,22 +2,8 @@ name: 编译xfrpc
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: '编译xfrpc源码的分支或版本号，默认主分支master'
-        required: true
-        default: 'master'
-      del:
-        description: '是否删除历史编译的流程记录'
-        required: true
-        default: true
-        type: boolean
-      rel:
-        description: '编译完成后是否发布Release'
-        required: true
-        default: true
-        type: boolean
       tag:
-        description: '指定Release的版本号（留空为源码提交哈希值）'
+        description: ''
         required: false
         default: ''
   
@@ -36,6 +22,41 @@ jobs:
       fail-fast: false
       matrix:
         include:
+        - target: aarch64-linux-musl
+          os: ubuntu-latest
+          URL: aarch64-linux-musl
+          ARCH_FLAG: linux-aarch64
+          
+        - target: x86_64-linux-musl
+          os: ubuntu-latest
+          URL: x86_64-linux-musl
+          ARCH_FLAG: linux-x86_64
+            
+        - target: i686-linux-musl
+          os: ubuntu-latest
+          URL: i686-linux-musl
+          ARCH_FLAG: linux-generic32
+        
+        - target: armv7-linux-musleabihf
+          os: ubuntu-latest
+          URL: armv7l-linux-musleabihf
+          ARCH_FLAG: linux-armv4
+
+        - target: armv7-linux-musleabi
+          os: ubuntu-latest
+          URL: armv7m-linux-musleabi
+          ARCH_FLAG: linux-armv4
+          
+        - target: arm-linux-musleabihf
+          os: ubuntu-latest
+          URL: arm-linux-musleabihf
+          ARCH_FLAG: linux-armv4
+
+        - target: arm-linux-musleabi
+          os: ubuntu-latest
+          URL: arm-linux-musleabi
+          ARCH_FLAG: linux-armv4
+
         - target: mipsel-linux-musl
           os: ubuntu-latest
           URL: mipsel-linux-muslsf
@@ -45,6 +66,16 @@ jobs:
           os: ubuntu-latest
           URL: mips-linux-muslsf
           ARCH_FLAG: linux-mips32
+
+        - target: mips64el-linux-musl
+          os: ubuntu-latest
+          URL: mips64el-linux-muslsf
+          ARCH_FLAG: linux-mips64
+
+        - target: mips-linux-musl
+          os: ubuntu-latest
+          URL: mips64-linux-muslsf
+          ARCH_FLAG: linux-mips64
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -74,7 +105,6 @@ jobs:
          make
          $STRIP xfrpc
          file xfrpc
-
      - name: 压缩
        run: |
         cd bin
