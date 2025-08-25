@@ -24,11 +24,11 @@ jobs:
         include:
           - target: mips64el-linux-musln32
             os: ubuntu-latest
-            URL: mips64el-linux-musln32-cross
+            URL: mips64el-linux-musln32
             ARCH_FLAG: linux-mips64-n32
           - target: mips64el-linux-musln32sf
             os: ubuntu-latest
-            URL: mips64el-linux-musln32sf-cross
+            URL: mips64el-linux-musln32sf
             ARCH_FLAG: linux-mips64-n32
 
     runs-on: ${{ matrix.os }}
