@@ -67,15 +67,11 @@ jobs:
           URL: mips-linux-muslsf
           ARCH_FLAG: linux-mips32
 
-        - target: mips64el-linux-musl
+        - target: mips64el-linux-musln32sf
           os: ubuntu-latest
-          URL: mips64el-linux-muslsf
+          URL: mips64el-linux-musln32sf
           ARCH_FLAG: linux-mips64
 
-        - target: mips-linux-musl
-          os: ubuntu-latest
-          URL: mips64-linux-muslsf
-          ARCH_FLAG: linux-mips64
 
     runs-on: ${{ matrix.os }}
     steps:
