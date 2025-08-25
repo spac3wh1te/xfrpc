@@ -22,46 +22,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - target: aarch64-linux-musl
+        - target: mips64el-linux-musln32
           os: ubuntu-latest
-          URL: aarch64-linux-musl
-          ARCH_FLAG: linux-aarch64
-          
-        - target: x86_64-linux-musl
-          os: ubuntu-latest
-          URL: x86_64-linux-musl
-          ARCH_FLAG: linux-x86_64
-            
-        - target: i686-linux-musl
-          os: ubuntu-latest
-          URL: i686-linux-musl
-          ARCH_FLAG: linux-generic32
-        
-        - target: armv7-linux-musleabihf
-          os: ubuntu-latest
-          URL: armv7l-linux-musleabihf
-          ARCH_FLAG: linux-armv4
-
-        - target: armv7-linux-musleabi
-          os: ubuntu-latest
-          URL: armv7m-linux-musleabi
-          ARCH_FLAG: linux-armv4
-          
-        - target: arm-linux-musleabihf
-          os: ubuntu-latest
-          URL: arm-linux-musleabihf
-          ARCH_FLAG: linux-armv4
-
-        - target: arm-linux-musleabi
-          os: ubuntu-latest
-          URL: arm-linux-musleabi
-          ARCH_FLAG: linux-armv4
-
-        - target: mips64el-linux-musl
-          os: ubuntu-latest
-          URL: mips64el-linux-musl
+          URL: mips64el-linux-musln32
           ARCH_FLAG: linux-mips64
-
+        - target: mips64el-linux-musln32sf
+          os: ubuntu-latest
+          URL: mips64el-linux-musln32sf
+          ARCH_FLAG: linux-mips64
 
     runs-on: ${{ matrix.os }}
     steps:
